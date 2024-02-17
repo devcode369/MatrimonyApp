@@ -1,4 +1,6 @@
 using API.Data;
+using API.Services;
+using API.Services.Inerfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.AddDbContext<DataContext>(option=>{
     option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
+builder.Services.AddScoped<ITokenServices,TokenServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
