@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Services.Inerfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +16,16 @@ namespace API.Controllers
     public class AccountController : BaseController
     {
         private readonly DataContext _dataContext;
-        public AccountController(DataContext dataContext)
+        private readonly ITokenServices _tokenServices;
+        public AccountController(DataContext dataContext,ITokenServices tokenServices)
         {
+            _tokenServices = tokenServices;
             _dataContext = dataContext;
             
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(RegisterDTO registerDTO)
+        public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
             if(await UserExists(registerDTO.UserName))
             { 
@@ -39,12 +42,15 @@ namespace API.Controllers
 
             _dataContext.Users.Add(user);
             await _dataContext.SaveChangesAsync();
-            return user;
+            return  new UserDTO{
+                User=user.UserName,
+                SecurityToken=_tokenServices.GenerateToken(user)
+            };
 
         }
          
          [HttpPost("login")]
-          public async Task<ActionResult<AppUser>>Login(LoginDTO loginDTO)
+          public async Task<ActionResult<UserDTO>>Login(LoginDTO loginDTO)
           {
               var user =await _dataContext.Users.FirstOrDefaultAsync(x=>x.UserName.ToLower()==loginDTO.UserName.ToLower());
 
@@ -62,7 +68,11 @@ namespace API.Controllers
                 }
              } 
 
-             return user;
+             return  new UserDTO{
+                User=user.UserName,
+                SecurityToken=_tokenServices.GenerateToken(user)
+            };
+;
 
           }
 
