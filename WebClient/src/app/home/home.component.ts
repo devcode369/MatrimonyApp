@@ -31,4 +31,8 @@ constructor(private http: HttpClient) {
   
     })
   }
+    cancelRegisterMode(event:boolean){
+      this.registerMode=event;
+    }
+ 
 }
