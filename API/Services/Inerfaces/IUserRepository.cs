@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+    using API.DTOs;
     using API.Entities;
 
     public interface IUserRepository
@@ -13,5 +14,9 @@ using System.Threading.Tasks;
         Task<IEnumerable<AppUser>>GetUsersAsync();
         Task<AppUser>GetUserByIdAsync(int id);
         Task<AppUser>GetUserBynameAsync(string userName);
+
+        Task<IEnumerable<MemberDTO>> GetMemberAsync();
+
+        Task<MemberDTO> GetMemberAsync(string username);
     }
 }
