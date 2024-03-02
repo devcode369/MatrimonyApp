@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../-models/users';
+import { User } from '../_models/users';
 import { map } from 'rxjs/internal/operators/map';
 import { BehaviorSubject } from 'rxjs';
 
