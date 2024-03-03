@@ -44,7 +44,7 @@ namespace API.Controllers
             await _dataContext.SaveChangesAsync();
             return  new UserDTO{
                 UserName=user.UserName,
-                SecurityToken=_tokenServices.GenerateToken(user)
+                Token=_tokenServices.GenerateToken(user)
             };
 
         }
@@ -70,7 +70,7 @@ namespace API.Controllers
 
              return  new UserDTO{
                 UserName=user.UserName,
-                SecurityToken=_tokenServices.GenerateToken(user)
+                Token=_tokenServices.GenerateToken(user)
             };
 ;
 

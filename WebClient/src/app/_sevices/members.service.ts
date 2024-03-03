@@ -14,22 +14,22 @@ export class MembersService {
    }
 
    getMembers(){
-    return this.http.get<Member[]>(this.baseUrl+'users',this.getHttpOptions());
+    return this.http.get<Member[]>(this.baseUrl+'users');
    }
   getMember(username: String){
-    return this.http.get<Member>(this.baseUrl+'users/'+username,this.getHttpOptions())
+    return this.http.get<Member>(this.baseUrl+'users/'+username)
   }
-  getHttpOptions(){
-    const userString =localStorage.getItem('user');
-    if(!userString) return;
-    const user=JSON.parse(userString);
+  // getHttpOptions(){
+  //   const userString =localStorage.getItem('user');
+  //   if(!userString) return;
+  //   const user=JSON.parse(userString);
 
-    return {
+  //   return {
 
-      headers:new HttpHeaders({
-        Authorization:'Bearer ' + user.securityToken
-      })
-    }
+  //     headers:new HttpHeaders({
+  //       Authorization:'Bearer ' + user.securityToken
+  //     })
+  //   }
 
-  }
+  // }
 }
