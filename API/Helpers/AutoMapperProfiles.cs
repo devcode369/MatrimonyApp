@@ -18,6 +18,7 @@ using System.Threading.Tasks;
             .ForMember(c=>c.PhotoUrl,opt=>opt.MapFrom(src=>src.Photos.FirstOrDefault(x=>x.IsMain).Url))
             .ForMember(d=>d.Age,opt=>opt.MapFrom(src=>src.DateOfBirth.CalculateAge()));
             CreateMap<Photo,PhotoDTO>();
+            CreateMap<MemberUpdateDto,AppUser>();
         }
     }
 }

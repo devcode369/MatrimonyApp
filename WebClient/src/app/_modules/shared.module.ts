@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -15,11 +16,15 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ToastrModule.forRoot({
       positionClass:'toast-bottom-right'
     }), // ToastrModule added
+    NgxSpinnerModule.forRoot({
+      type:'line-spin-fade'
+    })
   ],
   exports:[
     BsDropdownModule,
     ToastrModule,
-    TabsModule
+    TabsModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }
