@@ -30,8 +30,9 @@
        <!-- <div class="dropdown" *ngIf="currentUsers$ | async" dropdown> -->
         <!-- <div class="dropdown" *ngIf="accountService.curentUser$ | async" dropdown> -->
           <!-- The above line modified to below  because we can user inside the tag and add  brackets and add{{interpolation}}--> 
-          <div class="dropdown" *ngIf="(accountService.curentUser$ | async) as user" dropdown>        
-        <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
+          <div class="dropdown" *ngIf="(accountService.curentUser$ | async) as user" dropdown>    
+            <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">    
+        <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
         <div class="dropdown-menu" *dropdownMenu>
          <a class="dropdown-item" routerLink="/member/edit">Edit profile</a>
          <a class="dropdown-item" (click)="logout()" >Logout</a>        
