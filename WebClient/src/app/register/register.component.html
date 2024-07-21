@@ -18,17 +18,40 @@
     <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
   </div> -->
   <div class="mb-3">
-    <input type="text" class="form-control" formControlName="username"  placeholder="Username">
+    <input type="text" 
+    [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched"
+    class="form-control" formControlName="username"  placeholder="Username">
+    <div class="invalid-feedback">Please enter a username</div>
   </div>
 
   <div class="mb-3">
-    <input type="password" class="form-control" formControlName="password"  placeholder="password">
-
+    <input type="password"
+    [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched"
+    class="form-control" formControlName="password"  placeholder="password">
+    <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required')">
+      please enter a password
+      
+    </div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength')">
+      password must be at least 4 characters      
+    </div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('maxlength')">
+      password must be at most 8 characters    
+    </div>
+    
   </div>
 
   <div class="mb-3">
-    <input type="password" class="form-control" formControlName="confirmPassword"  placeholder="confirm password">
-
+    <input type="password"
+    [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched"
+    class="form-control" formControlName="confirmPassword"  placeholder="confirm password">
+    <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+      confirm password must be at least 4 characters      
+    </div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('notMatching')">
+     confirm password must match password  
+    </div>
+    
   </div>
   <div clas="text-center">
     <button class="btn btn-success me-2" type="submit">Register</button>
