@@ -7,7 +7,7 @@ export interface Pagination{
 
 }
 
-export class Paginationresult<T>{
+export class PaginatedResult<T>{
     result?:T ;
     pagination?:Pagination;
 }

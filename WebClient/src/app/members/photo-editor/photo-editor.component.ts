@@ -3,7 +3,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { Photo } from 'src/app/_models/photo';
-import { User } from 'src/app/_models/users';
+import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_sevices/members.service';
 import { environment } from 'src/environments/environment';
@@ -24,7 +24,7 @@ export class PhotoEditorComponent implements OnInit {
    */
   constructor(private accountService:AccountService,private memberService:MembersService) {
 
-    this.accountService.curentUser$.pipe(take(1)).subscribe({
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user =>{
         if(user) this.user =user
       }

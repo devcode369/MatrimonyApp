@@ -10,7 +10,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   //return true;
 
   // currentUser$ is observable so use pipe
-  return accountService.curentUser$.pipe(
+  return accountService.currentUser$.pipe(
     map(user=>{
       if(user)return true;
        else{

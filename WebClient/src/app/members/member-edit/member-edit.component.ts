@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
-import { User } from 'src/app/_models/users';
+import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_sevices/members.service';
 
@@ -26,7 +26,7 @@ export class MemberEditComponent implements OnInit{
 
   constructor(private accountService:AccountService,private membersService:MembersService,private tostr:ToastrService) {
     
-       this.accountService.curentUser$.pipe(take(1)).subscribe({
+       this.accountService.currentUser$.pipe(take(1)).subscribe({
         next:user=>this.user=user
        })
   }
