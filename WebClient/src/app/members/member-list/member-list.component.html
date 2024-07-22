@@ -3,8 +3,25 @@
         <app-member-card [member]="member"></app-member-card>
     </div> -->
 
-     <!-- The above code commented instead of that can use below because observable  -->
-    <div class="col-2" *ngFor="let member of members$ | async">
+    <!-- The above code commented instead of that can use below because observable  -->
+    <div class="col-2" *ngFor="let member of members">
         <app-member-card [member]="member"></app-member-card>
     </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination 
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemPerPage"
+    [maxSize]="10"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;">
+
+    </pagination>
+
 </div>

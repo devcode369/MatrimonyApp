@@ -7,6 +7,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Services.Inerfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -33,9 +34,10 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<PagedList<MemberDTO>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var user = await _userRepository.GetMemberAsync();
+            var user = await _userRepository.GetMemberAsync(userParams);
+            Response.AddPaginationHeader(new PaginationHeader(user.CurrentPage, user.PageSize, user.TotalCount, user.TotalPages));
 
 
             return new JsonResult(user);

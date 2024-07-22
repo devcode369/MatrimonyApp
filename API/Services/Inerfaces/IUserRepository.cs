@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
     using API.DTOs;
     using API.Entities;
+    using API.Helpers;
 
     public interface IUserRepository
     {
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
         Task<AppUser>GetUserByIdAsync(int id);
         Task<AppUser>GetUserBynameAsync(string userName);
 
-        Task<IEnumerable<MemberDTO>> GetMemberAsync();
+        Task<PagedList<MemberDTO>> GetMemberAsync(UserParams userParams);
 
         Task<MemberDTO> GetMemberAsync(string username);
     }
