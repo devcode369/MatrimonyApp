@@ -15,6 +15,8 @@ namespace API.Helpers
        public int MaxAge{ get; set;}=100;
 
        public string Gender { get; set; }
+       
+       public string OrderBy { get; set; }="lastActive";
 
         public int PageSize {
             get=>_pageSize;
