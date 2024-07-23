@@ -5,7 +5,9 @@ namespace API.Extensions
     {
         public static string GetUsername(this ClaimsPrincipal user)
         {
-            return user.FindFirst(ClaimTypes.Name)?.Value;
+            var currentuser= user.FindFirst(ClaimTypes.Name)?.Value;
+            return currentuser;
+
         }
          public static int GetUserId(this ClaimsPrincipal user)
         {
