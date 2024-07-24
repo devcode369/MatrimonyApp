@@ -12,6 +12,12 @@ namespace API.Entities
         public AppUser()
         {
             Photos=new List<Photo>();
+            LikedByUsers=new List<UserLike>();
+            LikedUsers=new List<UserLike>();
+            MessageSent=new List<Message>();
+            MessageReceived=new List<Message>();
+
+
         }
         public int Id { get; set; }
         public string UserName{get;set;}
@@ -28,6 +34,17 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public List<Photo> Photos { get; set; } 
+
+
+        public List<UserLike> LikedByUsers{ get; set; }
+
+        public List<UserLike> LikedUsers { get; set; }
+
+        public List<Message> MessageSent { get; set; }
+        public List<Message> MessageReceived { get; set; }
+
+
+
         // public int GetAge()
         // {
         //     return DateOfBirth.CalculateAge();
