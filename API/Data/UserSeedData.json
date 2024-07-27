@@ -1,6 +1,6 @@
 [
     {
-      "userName": "Peggy",
+      "username": "Peggy",
       "gender": "female",
       "dateOfBirth": "1985-08-25",
       "knownAs": "Peggy",
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "userName": "Francine",
+      "username": "Francine",
       "gender": "female",
       "dateOfBirth": "1970-12-11",
       "knownAs": "Francine",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "userName": "Katheryn",
+      "username": "Katheryn",
       "gender": "female",
       "dateOfBirth": "1973-01-08",
       "knownAs": "Katheryn",
@@ -57,7 +57,7 @@
       ]
     },
     {
-      "userName": "Roberta",
+      "username": "Roberta",
       "gender": "female",
       "dateOfBirth": "1954-04-27",
       "knownAs": "Roberta",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "userName": "Miranda",
+      "username": "Miranda",
       "gender": "female",
       "dateOfBirth": "1969-08-02",
       "knownAs": "Miranda",
@@ -96,7 +96,7 @@
     },
     
         {
-          "userName": "Mayer",
+          "username": "Mayer",
           "gender": "male",
           "dateOfBirth": "1953-02-26",
           "knownAs": "Mayer",
@@ -115,7 +115,7 @@
           ]
         },
         {
-          "userName": "Andrews",
+          "username": "Andrews",
           "gender": "male",
           "dateOfBirth": "1950-06-16",
           "knownAs": "Andrews",
@@ -134,7 +134,7 @@
           ]
         },
         {
-          "userName": "Carver",
+          "username": "Carver",
           "gender": "male",
           "dateOfBirth": "1992-09-19",
           "knownAs": "Carver",
@@ -153,7 +153,7 @@
           ]
         },
         {
-          "userName": "Stanton",
+          "username": "Stanton",
           "gender": "male",
           "dateOfBirth": "1973-03-10",
           "knownAs": "Stanton",
@@ -172,7 +172,7 @@
           ]
         },
         {
-          "userName": "Hendricks",
+          "username": "Hendricks",
           "gender": "male",
           "dateOfBirth": "1988-09-20",
           "knownAs": "Hendricks",

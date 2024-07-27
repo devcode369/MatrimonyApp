@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Services.Inerfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Services
@@ -15,17 +16,22 @@ namespace API.Services
     {
         //Encrypt,Decrypt key & sign token; will store in server not to client 
         private readonly SymmetricSecurityKey _symmetricSecurityKey;
-        public TokenServices(IConfiguration configs)
+        private readonly UserManager<AppUser> _userManager;
+
+        public TokenServices(IConfiguration configs,UserManager<AppUser> userManager)
         {
             _symmetricSecurityKey =new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configs["SecurityToken"]));
+            _userManager = userManager;
         }
-        public string GenerateToken(AppUser appUser)
+        public async Task<string> GenerateToken(AppUser appUser)
         {
             var claims =new List<Claim>{
 
                 new Claim(JwtRegisteredClaimNames.NameId,appUser.Id.ToString()),
                  new Claim(JwtRegisteredClaimNames.UniqueName,appUser.UserName)
             };
+            var roles=await _userManager.GetRolesAsync(appUser);
+            claims.AddRange(roles.Select(role=>new Claim(ClaimTypes.Role,role)));
 
             var signCred =new SigningCredentials(_symmetricSecurityKey,SecurityAlgorithms.HmacSha512Signature);
 

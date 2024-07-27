@@ -18,6 +18,9 @@
                 <li class="nav-item">
                   <a class="nav-link"  routerLink="/messages" routerLinkActive="activate">Messages</a>
                 </li>
+                <li *appHasRole="['Admin','Moderator']" class="nav-item">
+                  <a class="nav-link"  routerLink="/admin" routerLinkActive="activate">Admin</a>
+                </li>
                 <!-- <li class="nav-item" (click)="logout()">
                   <a class="nav-link" >Logout</a>
                 </li> -->
@@ -31,7 +34,7 @@
         <!-- <div class="dropdown" *ngIf="accountService.curentUser$ | async" dropdown> -->
           <!-- The above line modified to below  because we can user inside the tag and add  brackets and add{{interpolation}}--> 
           <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>    
-            <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">    
+            <img class="img-circle rounded-circle me-2" src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">    
         <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Welcome {{user.knownAs| titlecase}}</a>
         <div class="dropdown-menu" *dropdownMenu>
          <a class="dropdown-item" routerLink="/member/edit">Edit profile</a>

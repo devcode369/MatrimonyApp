@@ -32,7 +32,7 @@ namespace API.Controllers
         }
 
 
-
+       
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDTO>>> GetUsers([FromQuery] UserParams userParams)
         {
@@ -51,6 +51,7 @@ namespace API.Controllers
             return new JsonResult(user);
         }
 
+      
         [HttpGet("{userName}")]
         public async Task<ActionResult<MemberDTO>> GetUsers(string userName)
         {

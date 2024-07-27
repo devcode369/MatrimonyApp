@@ -4,6 +4,7 @@ import { User } from '../_models/user';
 import { map } from 'rxjs/internal/operators/map';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +39,19 @@ register(model:any){
 }
 
   setCurrentUser(user:User){
+    user.roles=[];
+    const roles=this.getDecodedToken(user.token).role;
+    Array.isArray(roles)?user.roles=roles: user.roles.push(roles);
     localStorage.setItem('user',JSON.stringify(user));
     this.curentUserSource.next(user);
   }
   logout(){
     localStorage.removeItem('user');
     this.curentUserSource.next(null);
+  }
+
+  getDecodedToken(token:string)
+  {
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }

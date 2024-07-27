@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class AppUser:IdentityUser<int>
     {
         public AppUser()
         {
@@ -19,10 +20,12 @@ namespace API.Entities
 
 
         }
-        public int Id { get; set; }
-        public string UserName{get;set;}
-        public byte[] PasswordHash{get;set;}
-        public byte[] PasswordSalt{get;set;}
+
+        // identity inherited so it will take care
+        // public int Id { get; set; }
+        // public string UserName{get;set;}
+        // public byte[] PasswordHash{get;set;}
+        // public byte[] PasswordSalt{get;set;}
         public DateOnly DateOfBirth { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; } =DateTime.UtcNow;
@@ -43,8 +46,8 @@ namespace API.Entities
         public List<Message> MessageSent { get; set; }
         public List<Message> MessageReceived { get; set; }
 
-
-
+        public ICollection<AppUserRole> UserRoles { get; set; }
+        
         // public int GetAge()
         // {
         //     return DateOfBirth.CalculateAge();

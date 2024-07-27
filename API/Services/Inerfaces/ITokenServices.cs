@@ -8,6 +8,6 @@ namespace API.Services.Inerfaces
 {
     public interface ITokenServices
     {
-        string GenerateToken(AppUser appUser);
+        Task<string> GenerateToken(AppUser appUser);
     }
 }
