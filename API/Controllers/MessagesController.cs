@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
 using API.DTOs;
-using API.Extensions;
-using AutoMapper;
 using API.Entities;
-using API.Services.Inerfaces;
+using API.Extensions;
 using API.Helpers;
+using API.Services.Inerfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace API.Controllers
@@ -28,7 +28,7 @@ namespace API.Controllers
         {
             var UserName = User.GetUsername();
 
-            if (UserName == createMessageDto.RecipientUsername.ToLower())
+            if (UserName == createMessageDto.RecipientUsername?.ToLower())
                 return BadRequest("you cannot send messages to yourself");
             var sender = await _userRepository.GetUserBynameAsync(UserName);
             var recipient = await _userRepository.GetUserBynameAsync(createMessageDto.RecipientUsername);

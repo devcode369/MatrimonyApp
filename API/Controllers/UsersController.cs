@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
@@ -12,7 +6,6 @@ using API.Services.Inerfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -32,16 +25,16 @@ namespace API.Controllers
         }
 
 
-       
+
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDTO>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var currentUser=await _userRepository.GetUserBynameAsync(User.GetUsername());
-            userParams.CurrentUserName=currentUser.UserName;
+            var currentUser = await _userRepository.GetUserBynameAsync(User.GetUsername());
+            userParams.CurrentUserName = currentUser.UserName;
 
-            if(string.IsNullOrEmpty(currentUser.Gender))
+            if (string.IsNullOrEmpty(currentUser.Gender))
             {
-                userParams.Gender=currentUser.Gender=="male"?"female":"male";
+                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
             }
 
             var user = await _userRepository.GetMemberAsync(userParams);
@@ -51,7 +44,7 @@ namespace API.Controllers
             return new JsonResult(user);
         }
 
-      
+
         [HttpGet("{userName}")]
         public async Task<ActionResult<MemberDTO>> GetUsers(string userName)
         {

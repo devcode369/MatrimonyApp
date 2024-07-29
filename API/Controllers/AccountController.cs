@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Services.Inerfaces;
@@ -44,10 +37,10 @@ namespace API.Controllers
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
-     var roleResult=await _userManager.AddToRoleAsync(user,"Member");
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
-     if(!roleResult.Succeeded) return BadRequest(roleResult.Errors);
-     
+            if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+
             return new UserDTO
             {
                 UserName = user.UserName,

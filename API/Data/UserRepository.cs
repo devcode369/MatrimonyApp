@@ -1,9 +1,5 @@
 namespace API.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using API.DTOs;
     using API.Entities;
     using API.Helpers;
@@ -11,6 +7,10 @@ namespace API.Data
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class UserRepository : IUserRepository
     {
@@ -24,31 +24,31 @@ namespace API.Data
         }
 
         public async Task<PagedList<MemberDTO>> GetMemberAsync(UserParams userParams)
-         {
+        {
 
-            
-            var query=_dataContext.Users.AsQueryable();
-            query=query.Where(u=>u.UserName !=userParams.CurrentUserName);
-            query=query.Where(u=>u.Gender==userParams.Gender);
-            var minDob =DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge -1 ));
-            var maxDob =DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge));
-            query=query.Where(u=>u.DateOfBirth >=minDob && u.DateOfBirth<=maxDob);
-            query=userParams.OrderBy switch
+
+            var query = _dataContext.Users.AsQueryable();
+            query = query.Where(u => u.UserName != userParams.CurrentUserName);
+            query = query.Where(u => u.Gender == userParams.Gender);
+            var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
+            var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge));
+            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+            query = userParams.OrderBy switch
             {
-                "created"=>query.OrderByDescending(u=>u.Created),
-                _ => query.OrderByDescending(u=>u.LastActive)
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
             };
 
-          //  return await PagedList<MemberDTO>.CreateAsync(query,userParams.PageNumber,userParams.PageSize,)
+            //  return await PagedList<MemberDTO>.CreateAsync(query,userParams.PageNumber,userParams.PageSize,)
 
-        //     var query = _dataContext.Users.ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
-        //                                    .AsNoTracking();
+            //     var query = _dataContext.Users.ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
+            //                                    .AsNoTracking();
 
-           return await PagedList<MemberDTO>.CreateAsync(
-            query.AsNoTracking().ProjectTo<MemberDTO>(_mapper.ConfigurationProvider),
-            userParams.PageNumber, 
-            userParams.PageSize
-            );
+            return await PagedList<MemberDTO>.CreateAsync(
+             query.AsNoTracking().ProjectTo<MemberDTO>(_mapper.ConfigurationProvider),
+             userParams.PageNumber,
+             userParams.PageSize
+             );
 
         }
 
