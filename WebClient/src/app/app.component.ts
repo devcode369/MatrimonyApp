@@ -21,14 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   ///Moved to home Component so removev Http client from constrcut and user any from int 
-  // getUsers(){
-  //   this.http.get('https://localhost:5260/api/Users').subscribe({
-  //     next: response=>this.users=response,
-  //     error: error=>console.log(error),
-  //     complete:()=>console.log('request completed')
-  
-  //   })
-  // }
+
    setCurrentUser(){
     //const user:User =JSON.parse(localStorage.getItem('user')!)
      const userString=localStorage.getItem('user');
