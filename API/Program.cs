@@ -59,7 +59,7 @@ try
     await context.Database.MigrateAsync();
     //the below one for samll app and lessdata if its huge then needto truncate by query
     //context.Connections.RemoveRange(context.Connections);
-    await context.Database.ExecuteSqlRawAsync("TTRUNCATE TABLE [Connections]");
+    await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [Connections]");
     await Seed.SeedUsers(userManger, roleManager);
 
 }

@@ -14,7 +14,7 @@ namespace API.Services.Inerfaces
 
         Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientName);
 
-        Task<bool> SaveAllAsync();
+   //     Task<bool> SaveAllAsync();
 
         void AddGroup(Group group);
         void RemoveConnection(Connection connection);

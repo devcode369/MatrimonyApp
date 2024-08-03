@@ -21,13 +21,14 @@ namespace API.Extensions
             });
             services.AddCors();
             services.AddScoped<ITokenServices, TokenServices>();
-            services.AddScoped<IUserRepository, UserRepository>();
+           // services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            //services.AddScoped<ILikesRepository, LikesRepository>();
+           // services.AddScoped<IMessageRepository, MessageRepository>();
+           services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddSignalR();
             services.AddSingleton<PresenceTracker>();
 

@@ -77,25 +77,26 @@ namespace API.Services
 
         public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientName)
         {
-            var messages = await _dataContext.Messages.Include(u => u.Sender).ThenInclude(p => p.Photos)
-                                                    .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+            var query =  _dataContext.Messages                                           
                                      .Where(m => m.RecipientUsername == currentUserName &&
                                      m.RecipientDeleted == false &&
                                       m.SenderUsername == recipientName
                                      || m.RecipientUsername == recipientName && m.SenderDeleted == false &&
                                      m.SenderUsername == currentUserName
-                                     ).OrderBy(m => m.MessageSent).ToListAsync();
+                                     ).OrderBy(m => m.MessageSent)
+                                     .AsQueryable();
+                                     //.ToListAsync();
 
-            var unreadMessage = messages.Where(m => m.DateRead == null && m.RecipientUsername == currentUserName).ToList();
+            var unreadMessage = query.Where(m => m.DateRead == null && m.RecipientUsername == currentUserName).ToList();
             if (unreadMessage.Any())
             {
                 foreach (var message in unreadMessage)
                 {
                     message.DateRead = DateTime.UtcNow;
                 }
-                await _dataContext.SaveChangesAsync();
+             //   await _dataContext.SaveChangesAsync();
             }
-            return _mapper.Map<IEnumerable<MessageDto>>(messages);
+            return  await query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider).ToListAsync();
 
         }
 
@@ -104,9 +105,9 @@ namespace API.Services
             _dataContext.Connections.Remove(connection);
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _dataContext.SaveChangesAsync() > 0;
-        }
+        // public async Task<bool> SaveAllAsync()
+        // {
+        //     return await _dataContext.SaveChangesAsync() > 0;
+        // }
     }
 }

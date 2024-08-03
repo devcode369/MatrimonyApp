@@ -9,7 +9,7 @@ namespace API.Services.Inerfaces
     public interface IUserRepository
     {
         void Update(AppUser user);
-        Task<bool> SaveAllAsync();
+       // Task<bool> SaveAllAsync();
         Task<IEnumerable<AppUser>> GetUsersAsync();
         Task<AppUser> GetUserByIdAsync(int id);
         Task<AppUser> GetUserBynameAsync(string userName);
@@ -17,5 +17,7 @@ namespace API.Services.Inerfaces
         Task<PagedList<MemberDTO>> GetMemberAsync(UserParams userParams);
 
         Task<MemberDTO> GetMemberAsync(string username);
+
+        Task<string> GetUserGender(string username);
     }
 }
