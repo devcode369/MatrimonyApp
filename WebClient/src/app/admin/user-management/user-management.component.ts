@@ -33,7 +33,10 @@ export class UserManagementComponent  implements OnInit{
 
   getUsersWithRoles(){
     this.adminService.getUsersWithRoles().subscribe({
-      next:users=>this.users=users
+      next:users=>{
+        
+      this.users=users
+      }
     })
   }
     openRolesModal(user:User){

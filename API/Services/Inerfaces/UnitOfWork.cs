@@ -19,6 +19,8 @@ namespace API.Services.Inerfaces
 
         public ILikesRepository LikesRepository => new LikesRepository(_dataContext);
 
+        public IPhotoRepository PhotoRepository => new PhotoRepository(_dataContext);
+
         public async Task<bool> Complete()
         {
             return await _dataContext.SaveChangesAsync() >0;

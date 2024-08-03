@@ -23,6 +23,15 @@ namespace API.Data
             _dataContext = dataContext;
         }
 
+        public async Task<AppUser> GetUserByPhotoId(int photoId)
+        {
+            return await _dataContext.Users
+            .Include(p => p.Photos)
+            .IgnoreQueryFilters()
+            .Where(p => p.Photos.Any(p => p.Id == photoId))
+            .FirstOrDefaultAsync();
+        }
+
         public async Task<PagedList<MemberDTO>> GetMemberAsync(UserParams userParams)
         {
 
@@ -52,11 +61,15 @@ namespace API.Data
 
         }
 
-        public async Task<MemberDTO> GetMemberAsync(string username)
+        public async Task<MemberDTO> GetMemberAsync(string username, bool isCurrentUser)
         {
-            return await _dataContext.Users.Where(x => x.UserName == username)
-                         .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
-                         .FirstOrDefaultAsync();
+            var query = _dataContext.Users.Where(x => x.UserName == username)
+                          .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
+                          .AsQueryable();
+
+            if (isCurrentUser) query = query.IgnoreQueryFilters();
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -73,7 +86,7 @@ namespace API.Data
 
         public async Task<string> GetUserGender(string username)
         {
-           return await _dataContext.Users.Where(x=>x.UserName.ToLower()==username.ToLower()).Select(g=>g.Gender).FirstOrDefaultAsync();
+            return await _dataContext.Users.Where(x => x.UserName.ToLower() == username.ToLower()).Select(g => g.Gender).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
